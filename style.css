@@ -1,0 +1,150 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px; /* Base font size for rem calculations */
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem; /* 40px converted to rem */
+  gap: 5.25rem; /* 84px converted to rem */
+}
+
+/* Main container - single center flexbox */
+.page-container {
+  width: 100%;
+  max-width: 50vw; /* 50% viewport width max */
+  min-width: 20rem; /* Minimum width for readability */
+  display: flex;
+  flex-direction: column;
+  gap: 5.25rem; /* 84px spacing between elements */
+}
+
+header {
+  background: white;
+  box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+header h1 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: #3498db;
+  font-weight: 500;
+  transition: color 0.3s;
+  font-size: 1rem;
+}
+
+nav a:hover,
+nav a.active {
+  color: #2980b9;
+  font-weight: bold;
+}
+
+main {
+  flex: 1; /* Takes remaining space */
+}
+
+#content {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.625rem rgba(0,0,0,0.1);
+}
+
+footer {
+  background: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  body {
+    padding: 1.25rem; /* 20px on mobile */
+    gap: 3rem; /* Smaller gap on mobile */
+  }
+  
+  .page-container {
+    max-width: 90vw; /* Wider on mobile */
+    gap: 3rem;
+  }
+  
+  header .container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  nav ul {
+    gap: 1rem;
+  }
+  
+  header h1 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 1rem;
+    gap: 2rem;
+  }
+  
+  .page-container {
+    max-width: 95vw;
+    gap: 2rem;
+  }
+  
+  nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* Typography scaling */
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
