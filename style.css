@@ -1,150 +1,287 @@
+:root {
+  --primary: #ff90de; /* Primary color */
+  --bg: #ffffff; /* Secondary color */
+  --text: #565656; /* Text color */
+
+  --text-size: 1.25rem; /* 21.5px - scaled from 40px */
+  --text-line-height: 2.15rem; /* 34.4px - scaled from 64px */
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
-  font-size: 16px; /* Base font size for rem calculations */
-}
-
 body {
-  font-family: 'Arial', sans-serif;
+  padding: 0;
+  font-family: 'Figtree', Arial, sans-serif;
   line-height: 1.6;
   color: #333;
-  background-color: #f4f4f4;
+  background-color: var(--bg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2.5rem; /* 40px converted to rem */
-  gap: 5.25rem; /* 84px converted to rem */
+}
+
+html {
+  font-size: 16px; /* 10px base font size */
+}
+
+p {
+  font-family: 'Figtree', Arial, sans-serif;
+  font-weight: 400;
+  color: var(--text);
+  font-size: var(--text-size);
+  line-height: var(--text-line-height);
+}
+
+
+/* Bold text styles */
+.bold {
+  font-family: 'Figtree', Arial, sans-serif;
+  font-weight: 700; /* Bold weight */
+  font-size: var(--text-size);
+  line-height: var(--text-line-height);
 }
 
 /* Main container - single center flexbox */
 .page-container {
-  width: 100%;
-  max-width: 50vw; /* 50% viewport width max */
-  min-width: 20rem; /* Minimum width for readability */
+  width: 58rem;
+  min-width: 20rem;
   display: flex;
   flex-direction: column;
-  gap: 5.25rem; /* 84px spacing between elements */
+  gap: 2.82rem; /* 45.1px - scaled from 84px between elements */
+  padding-top: 2.82rem; /* 21.5px - scaled from 40px top */
+  padding-bottom: 1.344rem; /* 21.5px - scaled from 40px bottom */
 }
 
 header {
-  background: white;
-  box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.1);
-  padding: 1.5rem;
-  border-radius: 0.5rem;
+  height: 2.688rem; /* 80px converted to rem */
+  display: flex;
+  align-items: center;
+  position: fixed; /* Fix to top of viewport */
+  top: 1.344rem; /* 21.5px - scaled from 40px top */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center the header */
+  width: 58rem; /* Same width as page-container */
+  max-width: calc(100vw - 2rem); /* Responsive width */
+  background-color: rgba(255, 255, 255, 0.95); /* Add background so content doesn't show through */
+  z-index: 100; /* Ensure it stays above other content */
 }
 
 header .container {
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Three equal columns */
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
+  position: relative; /* Add this for absolute positioning */
 }
 
-header h1 {
-  color: #2c3e50;
-  font-size: 1.5rem;
+header .container::before {
+  content: '';
+  position: absolute;
+  background-color: var(--primary);
+  height: 1.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+  transition: all 0.4s ease; /* Smooth sliding and width change */
+
+  left: var(--slider-left, 0.5rem);
+  width: var(--slider-width);
 }
 
+header .nav-left {
+  justify-self: start;
+  text-align: left;
+}
+
+/* Center column - align center */
+header .nav-center {
+  justify-self: center;
+  text-align: center;
+}
+
+/* Right column - align right */
+header .nav-right {
+  justify-self: end;
+  text-align: right;
+}
+
+/* Remove default nav styling */
 nav ul {
   list-style: none;
   display: flex;
-  gap: 2rem;
+  gap: 0; /* Remove gap since we're using grid layout */
+  margin: 0;
+  padding: 0;
 }
 
 nav a {
   text-decoration: none;
-  color: #3498db;
-  font-weight: 500;
-  transition: color 0.3s;
-  font-size: 1rem;
+  font-family: 'Readex Pro', Arial, sans-serif; /* Add Readex Pro to nav */
+  font-weight: 500; /* Medium weight */
+  color: var(--primary);
+  font-size: 1.6125rem;
+  text-transform: uppercase; /* Add uppercase transform */
+  position: relative; /* Add this for pseudo-element positioning */
+  z-index: 1; /* Put text above the sliding background */
+  transition: color 0.3s ease;
 }
 
-nav a:hover,
+nav a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
 nav a.active {
-  color: #2980b9;
-  font-weight: bold;
+  text-decoration: none; /* Remove underline for active state */
+  color: var(--primary); /* Keep primary color for active state */
 }
 
+nav a.active:hover {
+  color: var(--bg); /* Only show white text when hovering the active item */
+}
+ 
 main {
   flex: 1; /* Takes remaining space */
 }
 
 #content {
-  background: white;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.125rem 0.625rem rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 2.82rem; /* Same gap as page-container for consistent spacing */
+}
+
+.banner {
+  width: 100%;
+  margin: 0; /* Remove any default margins */
+  padding: 0; /* Remove any padding */
+}
+
+.banner-image {
+  width: 100%; /* Full width of main container */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Remove any inline spacing */
+  object-fit: cover; /* Cover the container while maintaining aspect ratio */
+}
+
+.two-column {
+  display: flex;
+  flex-direction: row;
+  gap: 1.93rem; /* 36px scaled: 36px × 0.537 = ~19.3px = 1.93rem */
+  align-items: flex-start; /* Align to top */
+}
+
+.two-column .column-left,
+.two-column .column-right {
+  flex-direction: column;
+  display: flex;
+  gap: 1.93rem; /* 36px scaled: 36px × 0.537 = ~19.3px = 1.93rem */
+  flex: 1; /* Equal width columns */
+}
+
+.divider {
+  width: 100%;
+  height: 0.125rem; /* 2px in rem */
+  background-color: var(--primary);
+  border: none;
 }
 
 footer {
-  background: #2c3e50;
-  color: white;
+  color: var(--primary);
   text-align: center;
   padding: 1.5rem;
   border-radius: 0.5rem;
 }
 
-/* Responsive breakpoints */
-@media (max-width: 768px) {
-  body {
-    padding: 1.25rem; /* 20px on mobile */
-    gap: 3rem; /* Smaller gap on mobile */
+@media (max-width: 48rem) { /* 768px - standard tablet breakpoint */
+  :root {
+    /* Mobile text sizing */
+    --text-size: 1.1rem; /* Smaller for mobile */
+    --text-line-height: 1.75rem;
   }
   
-  .page-container {
-    max-width: 90vw; /* Wider on mobile */
+  body {
+    padding: 1rem;
     gap: 3rem;
   }
   
-  header .container {
-    flex-direction: column;
-    text-align: center;
+  .page-container {
+    max-width: calc(100vw - 2rem);
+    gap: 2.5rem; /* Slightly smaller between elements */
+    padding-top: 1.2rem; /* Slightly smaller top/bottom */
+    padding-bottom: 1.2rem;
   }
   
-  nav ul {
-    gap: 1rem;
+  header {
+    height: 4rem; /* Scale down to 64px */
   }
   
-  header h1 {
-    font-size: 1.25rem;
+  nav a {
+    font-size: 1.45rem; /* Slightly smaller text */
+  }
+
+  header .container::before {
+    height: 1.65rem; /* Scaled with smaller font (1.45rem) */
+  }
+
+  #content {
+    gap: 2.5rem; /* Match page-container gap */
+  }
+
+  .two-column {
+    gap: 1.7rem; /* Slightly smaller gap on tablet */
+  }
+
+  .divider {
+    margin: 1.2rem 0; /* Slightly smaller on tablet */
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) { /* 480px - standard mobile breakpoint */
+  :root {
+    /* Mobile text sizing */
+    --text-size: 1rem; /* Smaller for mobile */
+    --text-line-height: 1.6rem;
+  }
+
   body {
-    padding: 1rem;
+    padding: 0.5rem;
     gap: 2rem;
   }
   
   .page-container {
-    max-width: 95vw;
-    gap: 2rem;
+    max-width: calc(100vw - 1rem);
+    gap: 2rem; /* Smaller between elements on mobile */
+    padding-top: 1rem; /* Smaller top/bottom on mobile */
+    padding-bottom: 1rem;
+  }
+  header {
+    height: 3.5rem; /* Scale down to 56px */
   }
   
-  nav ul {
-    flex-direction: column;
-    gap: 0.5rem;
+  nav a {
+    font-size: 1.3rem; /* Smaller text on mobile */
+    padding: 0.25rem;
   }
-}
 
-/* Typography scaling */
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
+  header .container::before {
+    height: 1.5rem; /* Scaled with mobile font (1.3rem) */
+  }
 
-h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.75rem;
-}
+  #content {
+    gap: 2rem; /* Match page-container gap */
+  }
 
-p {
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  .two-column {
+    flex-direction: column; /* Stack vertically on mobile */
+    gap: 2rem; /* Use same gap as other mobile elements */
+  }
+
+  .divider {
+    margin: 1rem 0; /* Slightly smaller on tablet */
+  }
 }
